@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>Külastuse registreerimine</title>
+</head>
+<body>
+
+    <h1>Külastuse registreerimine</h1>
+
+    <p>Sisesta oma nimi, et registreerida külastus.</p>
+
+    <form action="/kylastus" method="POST">
+
+        <label for="nameInput">Sinu nimi:</label>
+
+        <input type="text"
+               id="nameInput"
+               name="nameInput"
+               required>
+
+        <button type="submit">Salvesta külastus</button>
+
+    </form>
+
+    <p><a href="/">Tagasi avalehele</a></p>
+
+</body>
+</html>

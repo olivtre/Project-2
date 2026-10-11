@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Külastuse registreerimine</title>
+</head>
+<body>
+    <h1>Külastuse registreerimine</h1>
+    <p>Sisesta oma nimi, et külastus registreerida.</p>
+    <form action="/kylastus" method="POST">
+        <label for="nameInput">Sinu nimi:</label>
+        <input type="text" id="nameInput" name="nameInput" required>
+        <button type="submit">Salvesta külastus</button>
+    </form>
+    <p><a href="/viimane-kylastus">Vaata viimast külastust</a></p>
+    <p><a href="/">Avaleht</a></p>
+</body>
+</html>

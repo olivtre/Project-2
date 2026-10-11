@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viimane külastus</title>
+</head>
+<body>
+    <h1>Viimane külastus</h1>
+    <% if (visit) { %>
+        <p>Viimati registreeriti külastus <%= visit.date %>, kell <%= visit.time %> kui seda tegi <%= visit.name %>.</p>
+    <% } else { %>
+        <p>Külastusi pole veel registreeritud.</p>
+    <% } %>
+    <p><a href="/kylastus">Registreeri uus külastus</a></p>
+    <p><a href="/">Avaleht</a></p>
+</body>
+</html>
