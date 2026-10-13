@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uue isiku lisamine</title>
+</head>
+<body>
+    <h1>Uue isiku lisamine</h1>
+    <% if (notice) { %><p role="status"><%= notice %></p><% } %>
+    <form action="/eestifilm/inimesed_lisa" method="POST">
+        <p>
+            <label for="firstNameInput">Eesnimi:</label>
+            <input type="text" id="firstNameInput" name="firstNameInput"
+                   maxlength="100" required value="<%= values.firstNameInput ?? '' %>">
+        </p>
+        <p>
+            <label for="lastNameInput">Perekonnanimi:</label>
+            <input type="text" id="lastNameInput" name="lastNameInput"
+                   maxlength="100" required value="<%= values.lastNameInput ?? '' %>">
+        </p>
+        <p>
+            <label for="bornInput">Sünnikuupäev:</label>
+            <input type="date" id="bornInput" name="bornInput"
+                   required value="<%= values.bornInput ?? '' %>">
+        </p>
+        <p>
+            <label for="deceasedInput">Surmakuupäev (võib tühjaks jätta):</label>
+            <input type="date" id="deceasedInput" name="deceasedInput"
+                   value="<%= values.deceasedInput ?? '' %>">
+        </p>
+        <button type="submit">Lisa isik</button>
+    </form>
+    <p><a href="/eestifilm/inimesed">Vaata isikute nimekirja</a></p>
+    <p><a href="/eestifilm">Tagasi filmide lehele</a></p>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmidega seotud isikud</title>
+</head>
+<body>
+    <h1>Filmidega seotud isikud</h1>
+    <% if (notice) { %><p role="alert"><%= notice %></p><% } %>
+    <% if (people.length > 0) { %>
+        <table border="1" cellpadding="7">
+            <tr><th>Eesnimi</th><th>Perekonnanimi</th><th>Sünnikuupäev</th><th>Surmakuupäev</th></tr>
+            <% people.forEach(function(person) { %>
+                <tr>
+                    <td><%= person.first_name %></td>
+                    <td><%= person.last_name %></td>
+                    <td><%= person.bornText || '' %></td>
+                    <td><%= person.deceasedText || '' %></td>
+                </tr>
+            <% }); %>
+        </table>
+    <% } else if (!notice) { %>
+        <p>Isikute tabel on tühi.</p>
+    <% } %>
+    <p><a href="/eestifilm/inimesed_lisa">Lisa uus isik</a></p>
+    <p><a href="/eestifilm">Tagasi filmide lehele</a></p>
+</body>
+</html>

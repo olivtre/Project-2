@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uue filmi lisamine</title>
+</head>
+<body>
+    <h1>Uue filmi lisamine</h1>
+    <% if (notice) { %><p role="status"><%= notice %></p><% } %>
+    <form action="/eestifilm/filmid_lisa" method="POST">
+        <p>
+            <label for="titleInput">Filmi pealkiri:</label>
+            <input type="text" id="titleInput" name="titleInput" maxlength="100"
+                   required value="<%= values.titleInput ?? '' %>">
+        </p>
+        <p>
+            <label for="yearInput">Väljalaskeaasta:</label>
+            <input type="number" id="yearInput" name="yearInput" min="1888" max="2999"
+                   required value="<%= values.yearInput ?? '' %>">
+        </p>
+        <p>
+            <label for="durationInput">Kestus minutites:</label>
+            <input type="number" id="durationInput" name="durationInput" min="1"
+                   required value="<%= values.durationInput ?? '' %>">
+        </p>
+        <p>
+            <label for="descriptionInput">Kirjeldus:</label>
+            <textarea id="descriptionInput" name="descriptionInput" maxlength="1000" rows="4" cols="45"><%= values.descriptionInput ?? '' %></textarea>
+        </p>
+        <button type="submit">Lisa film</button>
+    </form>
+    <p><a href="/eestifilm">Tagasi filmide lehele</a></p>
+</body>
+</html>

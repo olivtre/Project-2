@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uue ameti lisamine</title>
+</head>
+<body>
+    <h1>Uue filmiga seotud ameti lisamine</h1>
+    <% if (notice) { %><p role="status"><%= notice %></p><% } %>
+    <form action="/eestifilm/ametid_lisa" method="POST">
+        <p>
+            <label for="titleInput">Ameti nimetus:</label>
+            <input type="text" id="titleInput" name="titleInput" maxlength="50"
+                   required value="<%= values.titleInput ?? '' %>">
+        </p>
+        <p>
+            <label for="descriptionInput">Kirjeldus:</label>
+            <textarea id="descriptionInput" name="descriptionInput" maxlength="1000" rows="4" cols="45"><%= values.descriptionInput ?? '' %></textarea>
+        </p>
+        <button type="submit">Lisa amet</button>
+    </form>
+    <p><a href="/eestifilm">Tagasi filmide lehele</a></p>
+</body>
+</html>
