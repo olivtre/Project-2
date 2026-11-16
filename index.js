@@ -3,6 +3,7 @@
 const express = require('express');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { openGalleryDb } = require('./src/galleryHelpers');
 require('dotenv').config();
 
 const app = express();
@@ -15,7 +16,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/pic', express.static(path.join(__dirname, 'pic')));
 
 // Varem tehtud veebilehed.
-app.get('/', (req, res) => res.render('index'));
+app.get('/', async (req, res) => {
+    let conn;
+    let latestPhoto = null;
+    try {
+        conn = await openGalleryDb();
+        const [rows] = await conn.execute(
+            `SELECT filename, alttext FROM galleryphotos
+             WHERE privacy = ? AND deleted IS NULL
+             ORDER BY id DESC LIMIT 1`, [3]
+        );
+        if (rows.length > 0) latestPhoto = rows[0];
+    } catch (err) {
+        // Avaleht töötab ka siis, kui galerii tabel pole veel loodud.
+        console.error('Uusima avaliku foto laadimise viga:', err.message);
+    } finally {
+        if (conn) await conn.end();
+    }
+    res.render('index', { latestPhoto });
+});
 app.get('/miks-tlu', (req, res) => res.render('miks-tlu'));
 app.get('/kylastus', (req, res) => res.render('kylastus'));
 
@@ -55,6 +74,12 @@ app.get('/viimane-kylastus', async (req, res) => {
 // Uue andmebaasi kodutöö marsruudid asuvad eraldi failis.
 const eestiFilmRouter = require('./routes/eestifilmRoutes');
 app.use('/eestifilm', eestiFilmRouter);
+
+// Fotogalerii: faili üleslaadimine ning fotode kuvamine.
+const galleryUploadRouter = require('./routes/galleryPhotoUploadRoutes');
+const galleryRouter = require('./routes/galleryRoutes');
+app.use('/galleryPhotoUpload', galleryUploadRouter);
+app.use('/gallery', galleryRouter);
 
 app.listen(PORT, () => {
     console.log('Veebiserver töötab pordil ' + PORT);

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto üleslaadimine</title>
+</head>
+<body>
+    <h1>Foto üleslaadimine</h1>
+    <p>Vali JPG/JPEG-foto (kuni 15 MB), lisa soovi korral alternatiivtekst ning määra privaatsus.</p>
+    <% if (notice) { %><p role="status"><strong><%= notice %></strong></p><% } %>
+    <form action="/galleryPhotoUpload" method="POST" enctype="multipart/form-data">
+        <p>
+            <label for="photoInput">Foto:</label>
+            <input type="file" id="photoInput" name="photoInput" accept=".jpg,.jpeg,image/jpeg" required>
+        </p>
+        <p>
+            <label for="alttext">Alternatiivtekst:</label>
+            <input type="text" id="alttext" name="alttext" maxlength="256"
+                   value="<%= values.alttext %>">
+        </p>
+        <fieldset>
+            <legend>Kes tohivad pilti näha?</legend>
+            <label><input type="radio" name="privacy" value="1" <%= values.privacy === '1' ? 'checked' : '' %>> 1 – privaatne</label>
+            <label><input type="radio" name="privacy" value="2" <%= values.privacy === '2' ? 'checked' : '' %>> 2 – sisselogitud kasutajatele (tulevikus)</label>
+            <label><input type="radio" name="privacy" value="3" <%= values.privacy === '3' ? 'checked' : '' %>> 3 – avalik</label>
+        </fieldset>
+        <p><button type="submit">Laadi foto üles</button></p>
+    </form>
+    <p><a href="/gallery">Vaata fotogaleriid</a></p>
+    <p><a href="/">Tagasi avalehele</a></p>
+</body>
+</html>

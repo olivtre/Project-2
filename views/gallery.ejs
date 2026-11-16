@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotogalerii</title>
+    <style>
+        .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        figure { border: 1px solid #ccc; margin: 0; padding: .75rem; }
+        figure img { display: block; width: 100%; height: 180px; object-fit: contain; }
+        figcaption { margin-top: .5rem; overflow-wrap: anywhere; }
+    </style>
+</head>
+<body>
+    <h1>Fotogalerii</h1>
+    <p>Siin kuvatakse fotosid privaatsustasemega 2 või 3.</p>
+    <% if (notice) { %><p role="status"><%= notice %></p><% } %>
+    <% if (photos.length === 0) { %>
+        <p>Galeriis pole veel näidatavaid fotosid.</p>
+    <% } else { %>
+        <p>Galerii sisaldab <%= photos.length %> fotot.</p>
+        <div class="photos">
+            <% photos.forEach(photo => { %>
+                <figure>
+                    <a href="/gallery/image/normal/<%= photo.filename %>" target="_blank" rel="noopener">
+                        <img loading="lazy" src="/gallery/image/thumbs/<%= photo.filename %>"
+                             alt="<%= photo.alttext || 'Galerii foto' %>">
+                    </a>
+                    <figcaption><%= photo.alttext || 'Galerii foto' %></figcaption>
+                </figure>
+            <% }); %>
+        </div>
+    <% } %>
+    <p><a href="/galleryPhotoUpload">Laadi uus foto üles</a></p>
+    <p><a href="/">Tagasi avalehele</a></p>
+</body>
+</html>

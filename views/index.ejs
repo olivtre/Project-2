@@ -16,6 +16,19 @@
         <li><a href="/kylastus">Registreeri külastus</a></li>
         <li><a href="/viimane-kylastus">Vaata viimast külastust</a></li>
         <li><a href="/eestifilm">Eesti filmide andmebaas</a></li>
+        <li><a href="/galleryPhotoUpload">Laadi foto üles</a></li>
+        <li><a href="/gallery">Fotogalerii</a></li>
     </ul>
+    <h2>Uusim avalik foto</h2>
+    <% if (latestPhoto) { %>
+        <figure>
+            <img src="/gallery/image/normal/<%= latestPhoto.filename %>"
+                 alt="<%= latestPhoto.alttext || 'Uusim avalik foto' %>"
+                 style="max-width: 100%; max-height: 450px; height: auto;">
+            <figcaption><%= latestPhoto.alttext || 'Uusim avalik foto' %></figcaption>
+        </figure>
+    <% } else { %>
+        <p>Praegu pole ühtegi avalikku fotot üles laaditud.</p>
+    <% } %>
 </body>
 </html>
